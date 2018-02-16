@@ -4,19 +4,12 @@ import com.rafibaum.metal.utils.MetalConfigurationException;
 
 /**
  * Angle is a class which represents unwrapped geometric angles in either radians or in degrees.
+ * Metal primarily uses "navigation" style angles where zero represents a forward angle and angles
+ * increase in the clockwise direction from there.
  */
 public class Angle {
 
     public static final Angle ZERO = new Angle(0.0);
-
-
-    /**
-     * The AngleUnit enum is used to specify whether an angle is in radians or degrees.
-     */
-    enum AngleUnit {
-        DEGREES,
-        RADIANS
-        }
 
     private double degrees;
 
@@ -142,10 +135,20 @@ public class Angle {
     }
 
     /**
-     * This method wraps this angle between -180 (inclusive) and 180 (not inclusive).
-     * @return the wrapped angle between -180 and 180
+     * This method wraps this angle between 0 (inclusive) and 360 (not inclusive).
+     * @return the wrapped angle between 0 and 360
      */
     public Angle wrap() {
+        return wrap(new Angle(0), new Angle(360));
+    }
+
+    /**
+     * This method wraps this angle between -180 (inclusive) and 180 (not inclusive).
+     * These bounds are commonly used when dealing with headings as it allows the use of
+     * negative angles to represent counter-clockwise rotations.
+     * @return the wrapped angle between -180 and 180
+     */
+    public Angle wrapNavigation() {
         return wrap(new Angle(-180), new Angle(180));
     }
 
