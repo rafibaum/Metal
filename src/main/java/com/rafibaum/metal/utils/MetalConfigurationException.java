@@ -8,6 +8,23 @@ package com.rafibaum.metal.utils;
  */
 public class MetalConfigurationException extends RuntimeException {
 
+    public MetalConfigurationException() {
+        super();
+    }
 
+    public MetalConfigurationException(String s) {
+        super(s);
+    }
 
+    public MetalConfigurationException(String s, Throwable throwable) {
+        super(s, throwable);
+    }
+
+    public MetalConfigurationException(Throwable throwable) {
+        super(throwable);
+    }
+
+    protected MetalConfigurationException(String s, Throwable throwable, boolean b, boolean b1) {
+        super(s, throwable, b, b1);
+    }
 }
