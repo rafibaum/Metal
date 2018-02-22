@@ -3,6 +3,7 @@ package com.rafibaum.metal.geometry;
 import com.rafibaum.metal.utils.MetalConfigurationException;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AngleTests {
@@ -72,6 +73,19 @@ public class AngleTests {
         //Should wrap to -30
         double navAngle = new Angle(330).wrapNavigation().toDegrees();
         assertTrue(aboutEqual(-30, navAngle));
+    }
+
+    @Test
+    public void equalsTest() {
+        Angle a = new Angle(180);
+        Angle b = new Angle(AngleUnit.RADIANS, Math.PI);
+        Angle c = new Angle(540);
+
+        //Should be equal
+        assertTrue(a.equals(b));
+
+        //Should not be
+        assertFalse(a.equals(c));
     }
 
     /*

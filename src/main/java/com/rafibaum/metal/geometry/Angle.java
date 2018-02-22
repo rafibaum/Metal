@@ -152,4 +152,14 @@ public class Angle {
         return wrap(new Angle(-180), new Angle(180));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        //If object is not an angle, return false
+        if(!(o instanceof Angle)) return false;
+        //Now it's safe to cast o as an angle
+        Angle a = (Angle) o;
+
+        //Return true if they're similar within a tolerance
+        return Math.abs(a.toDegrees() - degrees) < .0001;
+    }
 }
