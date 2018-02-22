@@ -1,7 +1,9 @@
 package com.rafibaum.metal.geometry;
 
 /**
- * Polar is a representation of vectors using polar coordinates.
+ * Polar is a representation of vectors using polar coordinates. By default Metal will not wrap
+ * the magnitude or angle to any regular range. Negative magnitudes and angles outside of [0, 360]
+ * will be maintained unless you call wrapMagnitude or wrapAngle, or wrap.
  */
 public class Polar implements Vector {
 
@@ -24,8 +26,7 @@ public class Polar implements Vector {
      * @param degrees the angle of the vector in degrees
      */
     public Polar(double magnitude, double degrees) {
-        this.magnitude = magnitude;
-        this.angle = new Angle(degrees);
+        this(magnitude, new Angle(AngleUnit.DEGREES, degrees));
     }
 
     /**
@@ -136,5 +137,39 @@ public class Polar implements Vector {
 
         //Magnitude of the cross product = |V1| * |V2| * sin(angle between vectors)
         return this.getMagnitude() * vector.getMagnitude() * Math.sin(angleBetween);
+    }
+
+    /**
+     * This method makes polar vector "regular" by performing two operations. First,
+     * it makes sure that if the magnitude of the polar vector is negative that the sign
+     * is made positive and the angle is adjusted accordingly. Then, it wraps the vector's
+     * angle to be between zero and 360 degrees.
+     * @return a vector pointing in the same direction with positive magnitude and a valid reference angle
+     */
+    public Polar wrap() {
+        double magnitude = this.magnitude;
+        Angle angle = this.angle;
+
+        //If magnitude is negative, flip sign and angle
+        if(magnitude < 0) {
+            magnitude = this.magnitude * -1; //Flip magnitude sign
+            angle = angle.add(new Angle(180));
+        }
+
+
+        angle = angle.wrap(); //Wrap angles to within [0, 360] range after rotating angle
+
+        return new Polar(magnitude, angle);
+    }
+
+    /**
+     * This method returns an equivalent polar vector with an angle wrapped between zero
+     * and 360 degrees.
+     * @return an equivalent vector with an angle wrapped between zero and 360 degrees.
+     */
+    public Polar wrapAngle() {
+        Angle angle = this.angle.wrap(); //Should wrap between zero and 360
+
+        return new Polar(magnitude, angle);
     }
 }
