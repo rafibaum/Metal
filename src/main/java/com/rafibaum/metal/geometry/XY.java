@@ -128,4 +128,18 @@ public class XY implements Vector {
         //Magnitude of the cross product = |V1| * |V2| * sin(angle between vectors)
         return this.getMagnitude() * vector.getMagnitude() * Math.sin(angleBetween);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        //If object is not a vector, it cannot be equal
+        if(!(o instanceof Vector)) return false;
+
+        //Now it's safe to cast the object as a vector
+        Vector v = (Vector) o;
+
+        //If x and y coordinates are equal within tolerance, the vectors are equal
+        return(Math.abs(v.getX() - this.getX()) < .0001 &&
+                Math.abs(v.getY() - this.getY()) < .0001);
+
+    }
 }

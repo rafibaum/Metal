@@ -172,4 +172,21 @@ public class Polar implements Vector {
 
         return new Polar(magnitude, angle);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        //If object is not a vector, it cannot be equal
+        if(!(o instanceof Vector)) return false;
+
+        //Now it's safe to cast the object as a vector
+        Vector v = (Vector) o;
+
+        //If x and y coordinates are equal within tolerance, the vectors are equal
+        if(Math.abs(v.getX() - this.getX()) < .0001 &&
+                Math.abs(v.getY() - this.getY()) < .0001) {
+            return true;
+        }
+
+        return false;
+    }
 }
