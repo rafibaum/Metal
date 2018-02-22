@@ -52,7 +52,7 @@ public class XY implements Vector {
      */
     @Override
     public Angle getAngle() {
-        return new Angle(AngleUnit.RADIANS, Math.atan2(x, y) + Math.PI);
+        return new Angle(AngleUnit.RADIANS, Math.atan2(x, y)).wrap();
     }
 
     /**
