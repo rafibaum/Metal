@@ -1,5 +1,5 @@
 # Metal
-Metal is a in-development robot framework for FRC, with a focus on making FRC programming more reliable and easy. The framework is being developed with a few key goals in mind:
+Metal is an in-development robot framework for FRC, with a focus on making FRC programming more reliable and easy. The framework is being developed with a few key goals in mind:
 
 * Clear structure for using the framework
 * Well-written documentation
